@@ -24,6 +24,7 @@ describe('lone', function(){
       done();
     });
   });
+
   it('should work with a zip appended to node', function(done){
     lone(__dirname + '/fixtures/hello/.dist/hello', function(err, res){
       if(err) return done(err);

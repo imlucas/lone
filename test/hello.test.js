@@ -1,11 +1,9 @@
 "use strict";
 
-var path = require('path'),
-  assert = require('assert'),
+var assert = require('assert'),
   fs = require('fs'),
   child_process = require('child_process'),
   lone = require('../'),
-  derp = require('../lib/derp'),
   debug = require('debug')('lone:test:hello');
 
 describe('hello', function(){

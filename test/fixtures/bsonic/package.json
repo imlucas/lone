@@ -1,0 +1,10 @@
+{
+  "name": "bsonic",
+  "version": "0.0.0",
+  "bin": {
+    "bsonic": "./bin/bsonic.js"
+  },
+  "dependencies": {
+    "bson": "^0.2.7"
+  }
+}
