@@ -9,7 +9,10 @@ var path = require('path'),
   debug = require('debug')('lone:test:hello');
 
 describe('hello', function(){
-  var config = {src: __dirname + '/fixtures/hello'};
+  var config = {
+    src: __dirname + '/fixtures/hello',
+    cache: __dirname + '/.lone'
+  };
 
   before(function(done){
     lone.configure(config)(function(err, data){

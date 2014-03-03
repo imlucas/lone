@@ -5,11 +5,12 @@
 - [x] use the basename of process.execPath as the directory to fill in tmp
 - [x] run strip on node binary before adding app bundle?
 - [x] use `./bin/<name>` convention instead of package.json#main
-- [ ] clean up test fixture apps and have reliable fixtures
-- [ ] more tests for `lib/source`
-- [ ] more tests for `lib/deliver`
-- [ ] more tests for `lib/bundle`
-- [ ] more tests for embedding
+- [x] clean up test fixture apps and have reliable fixtures
+- [x] more tests for `lib/source`
+- [x] more tests for `lib/deliver`
+- [x] more tests for `lib/bundle`
+- [x] more tests for embedding
+- [ ] tests against a binary add-on
 
 ## alpha
 

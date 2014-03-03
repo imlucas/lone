@@ -27,6 +27,7 @@ function Lone(src, fn){
       self.pkg = JSON.parse(data);
       var Module = require('module');
       Module._load(path.resolve(self.dest, self.pkg.bin[self.pkg.name]), null, true);
+      fn(null, self);
     });
   });
 }

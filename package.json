@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
-    "test": "mocha --timeout 300000",
+    "test": "mocha --timeout 600000",
     "build": "lone"
   },
   "bin": {
