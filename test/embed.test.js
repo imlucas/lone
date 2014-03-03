@@ -3,7 +3,7 @@ var lone = require('../embed/_third_party_main.js'),
   fs = require('fs');
 
 describe('lone', function(){
-  it('should work with just a zip', function(done){
+  it.skip('should work with just a zip', function(done){
     lone(__dirname + '/fixtures/js-only-app.zip', function(err, res){
       if(err) return done(err);
       assert(fs.existsSync(res.dest));
