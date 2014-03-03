@@ -10,10 +10,11 @@
 - [x] more tests for `lib/deliver`
 - [x] more tests for `lib/bundle`
 - [x] more tests for embedding
-- [ ] tests against a binary add-on
+- [x] tests against a binary add-on
 
 ## alpha
 
+- [ ] figure out how to make binary add-on's fully work
 - [ ] build a few things for mongodb and leveldb
 - [ ] fire up vagrant and make sure things are good on ubuntu 64
 - [ ] simple streaming zip module that actually works to replace adm-zip
