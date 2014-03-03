@@ -1,0 +1,18 @@
+
+# lone.js setup
+
+Add a bin for your app and install a local version, copy and paste:
+
+```
+npm install --save-dev jsontool lone;
+export JSONTOOL=`npm bin`/json -f package.json;
+export JSONEDIT=$(JSONTOOL) -I -c;
+export APPNAME=`$(JSONTOOL)` name;
+$(JSONEDIT) 'this.scripts.build="lone"';
+$(JSONEDIT) 'this.bin.$(APPNAME)="./bin/$(APPNAME).js"';
+echo "#!/usr/bin/env node\n\nrequire('../index.js')();" > ./bin/$(APPNAME).js;
+chmod +x ./bin/$(APPNAME).js;
+```
+
+Now to build your executable, you can just run `npm run-script build` from
+your app directory.

@@ -1,0 +1,26 @@
+{
+  "name": "lone",
+  "version": "0.0.1",
+  "description": "Turn node.js apps into standalone executables.",
+  "scripts": {
+    "test": "mocha",
+    "build": "lone"
+  },
+  "bin": {
+    "lone": "./bin/lone.js"
+  },
+  "dependencies": {
+    "debug": "^0.7.4",
+    "async": "^0.2.10",
+    "request": "^2.34.0",
+    "mkdirp": "^0.3.5",
+    "combined-stream": "0.0.4",
+    "yargs": "^1.2.1",
+    "tar": "^0.1.19"
+  },
+  "devDependencies": {
+    "mocha": "^1.17.1",
+    "gulp": "^3.5.5",
+    "gulp-zip": "^0.1.2"
+  }
+}
