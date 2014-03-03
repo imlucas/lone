@@ -16,7 +16,9 @@
     "mkdirp": "^0.3.5",
     "combined-stream": "0.0.4",
     "yargs": "^1.2.1",
-    "tar": "^0.1.19"
+    "tar": "^0.1.19",
+    "glob": "^3.2.9",
+    "minimatch": "^0.2.14"
   },
   "devDependencies": {
     "mocha": "^1.17.1",
