@@ -3,6 +3,7 @@
 var path = require('path'),
   assert = require('assert'),
   fs = require('fs'),
+  child_process = require('child_process'),
   lone = require('../'),
   derp = require('../lib/derp'),
   debug = require('debug')('lone:test:hello');
@@ -43,7 +44,12 @@ describe('hello', function(){
     lone.compile(config, function(err, res){
       if(err) return done(err);
 
-      done();
+      config = res;
+      child_process.exec(config.out, function(out, stdout, stderr){
+        if(err) return done(err);
+        assert.equal(stdout.toString(), 'hello\n');
+        done();
+      });
     });
   });
 });
