@@ -22,5 +22,5 @@ if(yargs.argv.setup) return console.error(fs.readFileSync(__dirname + '/setup', 
 
 lone(yargs.argv._[0], yargs.argv, function(err, conf){
   if(err) return console.error(':(', err.message) && process.exit(1);
-  console.log(conf.app.out);
+  console.log(conf.out);
 });
