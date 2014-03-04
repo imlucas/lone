@@ -50,6 +50,38 @@
 
 ## brainstorm
 
+### binary add-ons
+
+```
+rm -rf /var/folders/wm/3kkwvb0d2rl96xgn8wrc6px80000gn/T/bsonic/
+rm -rf test/fixtures/bsonic/.dist/
+rm -rf test/fixtures/bsonic/.build/
+rm -rf test/fixtures/bsonic/node_modules/
+SKIP_THIRD_PARTY=1 ../../.lone/node-v0.10.26/out/Release/node ../../.lone/node-v0.10.26/deps/npm/bin/npm-cli.js install
+DEBUG=lone:* ./node_modules/.bin/mocha test/bsonic.test.js --timeout 60000
+```
+
+Still getting
+
+```
+module.js:356
+  Module._extensions[extension](this, filename);
+                               ^
+Error: dlopen(/private/var/folders/wm/3kkwvb0d2rl96xgn8wrc6px80000gn/T/bsonic/node_modules/bson/build/Release/bson.node, 1): no suitable image found.  Did find:
+    /private/var/folders/wm/3kkwvb0d2rl96xgn8wrc6px80000gn/T/bsonic/node_modules/bson/build/Release/bson.node: unknown file type, first eight bytes: 0xEF 0xBF 0xBD 0xEF 0xBF 0xBD 0xEF 0xBF
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/private/var/folders/wm/3kkwvb0d2rl96xgn8wrc6px80000gn/T/bsonic/node_modules/bson/ext/index.js:14:9)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+```
+
+
 ### container/launcher
 
 - multiple node apps/other binaries in a wrapper app
