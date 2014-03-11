@@ -1,13 +1,32 @@
 "use strict";
 var derp = require('./lib/derp');
 
-module.exports = require('./lib');
+var lone = require('./lib');
+
+module.exports = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.bundle, lone.compile, fn);
+};
+module.exports.all = module.exports;
 
 module.exports.manifest = function(opts, fn){
-  derp.sync(opts, module.exports.bundle.manifest, fn);
+  derp.sync(lone.configure(opts), lone.bundle.manifest, fn);
 };
 
 module.exports.zip = function(opts, fn){
-  derp.sync(opts, module.exports.bundle.manifest,
-    module.exports.bundle.zip, fn);
+  derp.sync(lone.configure(opts), lone.bundle.manifest, lone.bundle.zip, fn);
 };
+
+module.exports.bundle = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.bundle, fn);
+};
+
+module.exports.embed = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.compile.embed, fn);
+};
+
+module.exports.make = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.compile.mak, fn);
+};
+
+module.exports.actions = Object.keys(module.exports);
+module.exports.options = lone.options;
