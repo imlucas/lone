@@ -20,12 +20,20 @@ module.exports.bundle = function(opts, fn){
   derp.sync(lone.configure(opts), lone.bundle, fn);
 };
 
+module.exports.compile = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.compile, fn);
+};
+
 module.exports.embed = function(opts, fn){
   derp.sync(lone.configure(opts), lone.compile.embed, fn);
 };
 
+module.exports.download = function(opts, fn){
+  derp.sync(lone.configure(opts), lone.compile.download, fn);
+};
+
 module.exports.make = function(opts, fn){
-  derp.sync(lone.configure(opts), lone.compile.mak, fn);
+  derp.sync(lone.configure(opts), lone.compile.make, fn);
 };
 
 module.exports.actions = Object.keys(module.exports);
