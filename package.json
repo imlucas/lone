@@ -1,6 +1,6 @@
 {
   "name": "lone",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
     "test": "mocha --timeout 600000",
