@@ -8,25 +8,15 @@ var assert = require('assert'),
 
 describe('hello', function(){
   var config = {
-    src: __dirname + '/fixtures/hello',
-    cache: __dirname + '/.lone'
+    src: __dirname + '/fixtures/hello'
   };
 
-  before(function(done){
-    lone.configure(config)(function(err, data){
-      if(err) return done(err);
-
-      config = data;
-      done();
-    });
-  });
-
   it('should create a manifest', function(done){
-    lone.bundle.manifest(config, function(err, res){
+    lone.manifest(config, function(err, res){
       if(err) return done(err);
 
       config = res;
-      assert.deepEqual(config.manifest.files, ['./index.js', './package.json']);
+      assert.deepEqual(config.manifest.files, ['index.js', 'package.json']);
       done();
     });
   });
@@ -42,7 +32,7 @@ describe('hello', function(){
   });
 
   it('should deliver a runnable executable', function(done){
-    lone.compile(config, function(err, res){
+    lone(config, function(err, res){
       if(err) return done(err);
 
       config = res;

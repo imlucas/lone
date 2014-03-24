@@ -4,10 +4,13 @@ var lone = require('../embed/_third_party_main.js'),
 
 describe('lone', function(){
   var realLog = console.log;
-  before(function(){
+  before(function(done){
     console.log = function(){
       console._counter = 1;
     };
+    require('../')({src: __dirname + '/fixtures/hello'}, function(){
+      done();
+    });
   });
 
   after(function(){
