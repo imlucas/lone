@@ -1,0 +1,16 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "chef/ubuntu-13.10"
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
+  config.vm.network "public_network", :bridge => "en0: Wi-Fi (AirPort)"
+  config.ssh.forward_agent = true
+  config.vm.provision :shell, :path => "bootstrap.sh"
+  config.vm.synced_folder "../", "/lone"
+
+  # config.vm.provision "chef_client" do |chef|
+  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
+  #   chef.validation_key_path = "ORGNAME-validator.pem"
+  # end
+  # chef.validation_client_name = "ORGNAME-validator"
+end
