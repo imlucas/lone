@@ -1,10 +1,16 @@
 {
   "name": "lone",
   "version": "0.1.0",
+  "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
     "test": "mocha --timeout 600000",
     "build": "lone"
+  },
+  "homepage": "http://github.com/imlucas/lone",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imlucas/lone.git"
   },
   "bin": {
     "lone": "./bin/lone.js"
