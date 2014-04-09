@@ -1,12 +1,7 @@
-"use strict";
-
-var path = require('path'),
-  assert = require('assert'),
-  os = require('os'),
+var assert = require('assert'),
   fs = require('fs-extra'),
   child_process = require('child_process'),
-  lone = require('../'),
-  debug = require('debug')('lone:test:bsonic');
+  lone = require('../');
 
 describe('bsonic', function(){
   var config = {
@@ -34,7 +29,7 @@ describe('bsonic', function(){
       if(err) return done(err);
       config = res;
       try{
-        fs.existsSync(config.bundle)
+        fs.existsSync(config.bundle);
       }
       catch(e){
         return done(new Error(config.bundle + ' does not exist'));
@@ -55,7 +50,7 @@ describe('bsonic', function(){
         }
         assert.equal(stdout.toString(), 'DwAAABBsb25lAAEAAAAA\n');
 
-        child_process.exec(config.out + ' DwAAABBsb25lAAEAAAAA', function(out, stdout, stderr){
+        child_process.exec(config.out + ' DwAAABBsb25lAAEAAAAA', function(err, stdout){
           if(err) return done(err);
 
           assert.equal(stdout.toString(), '{ lone: 1 }\n');

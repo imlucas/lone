@@ -1,7 +1,7 @@
 # lone.js
 
 Turn node.js apps into standalone executables, with cross-platform and
-binary add-on support (almost).
+binary add-on support.
 
 ```
 npm install -g lone && lone ./path-to-app;

@@ -1,10 +1,7 @@
-"use strict";
-
 var assert = require('assert'),
   fs = require('fs'),
   child_process = require('child_process'),
-  lone = require('../'),
-  debug = require('debug')('lone:test:hello');
+  lone = require('../');
 
 describe('hello', function(){
   var config = {
@@ -36,7 +33,7 @@ describe('hello', function(){
       if(err) return done(err);
 
       config = res;
-      child_process.exec(config.out, function(out, stdout, stderr){
+      child_process.exec(config.out, function(err, stdout){
         if(err) return done(err);
         assert.equal(stdout.toString(), 'hello\n');
         done();

@@ -6,8 +6,7 @@ var path = require('path'),
 // @todo: support ./test/fixtures/bundled that has some random binary in front
 // of the actual bundle.
 function app(src){
-  var name = path.basename(src),
-    self = {
+  var self = {
       zip: function(){
         gulp.src(src + '/*')
           .pipe(zip(path.basename(src) + '.zip'))

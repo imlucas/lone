@@ -1,7 +1,6 @@
 var fs = require('fs'),
   os = require('os'),
   path = require('path'),
-  zlib = require('zlib'),
   embedded = false,
   AdmZip;
 
@@ -65,11 +64,10 @@ Lone.prototype.extract = function(fn){
 };
 
 if(embedded){
-  new Lone(process.execPath, function(err, lone){
+  new Lone(process.execPath, function(err){
     if(err){
       return console.error('lonejs: failed to extract', err);
     }
-
   });
 }
 else {

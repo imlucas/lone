@@ -1,7 +1,5 @@
-"use strict";
-var derp = require('./lib/derp');
-
-var lone = require('./lib');
+var derp = require('./lib/derp'),
+  lone = require('./lib');
 
 module.exports = function(opts, fn){
   derp.sync(lone.configure(opts), lone.bundle, lone.compile, fn);
