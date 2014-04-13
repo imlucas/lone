@@ -1,7 +1,8 @@
 var assert = require('assert'),
   fs = require('fs-extra'),
   child_process = require('child_process'),
-  lone = require('../');
+  lone = require('../'),
+  which = require('which');
 
 describe('bsonic', function(){
   var config = {
@@ -46,7 +47,7 @@ describe('bsonic', function(){
       child_process.exec(config.out, function(out, stdout, stderr){
         if(err) return done(err);
         if(stderr.toString().length > 0){
-          return done(new Error(stderr.toString()));
+          return done(new Error(stderr.toString() + '\nMake sure node-gyp is installed!\n\nsudo npm install -g node-gyp && rm -rf test/fixtures/bsonic/node_modules;\nAnd run tests again!'));
         }
         assert.equal(stdout.toString(), 'DwAAABBsb25lAAEAAAAA\n');
 
