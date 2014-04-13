@@ -19,7 +19,7 @@ describe('lone', function(){
   });
 
   it('should work with just a zip', function(done){
-    lone(__dirname + '/fixtures/hello/.build/hello.zip', function(err, res){
+    lone(__dirname + '/fixtures/hello/.lone/build/hello.zip', function(err, res){
       if(err) return done(err);
 
       assert(fs.existsSync(res.dest + '/index.js'), 'did not unpack bundle');
@@ -29,7 +29,7 @@ describe('lone', function(){
   });
 
   it('should work with a zip appended to node', function(done){
-    lone(__dirname + '/fixtures/hello/.dist/hello', function(err, res){
+    lone(__dirname + '/fixtures/hello/.lone/dist/hello', function(err, res){
       if(err) return done(err);
 
       assert(fs.existsSync(res.dest + '/index.js'), 'did not unpack bundle');
