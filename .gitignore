@@ -3,4 +3,4 @@ node_modules
 .build
 vagrant/.vagrant
 test/.lone
-test/fixtures/**/.dist
+test/fixtures/**/.lone
