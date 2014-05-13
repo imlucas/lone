@@ -55,7 +55,7 @@ Lone.prototype.extract = function(fn){
     })
     .on('end', function(){
       if(chunks.length === 0){
-        return fn(new Error('No bundle embedded in ' + self.src));
+        return fn(new Error('lone: no bundle embedded in ' + self.src + '.  0 zip chunks found in binary.'));
       }
       self.bundle = Buffer.concat(chunks);
       new AdmZip(self.bundle).extractAllTo(self.dest, true);
