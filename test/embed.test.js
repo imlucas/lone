@@ -1,6 +1,9 @@
 var lone = require('../embed/_third_party_main.js'),
   assert = require('assert'),
-  fs = require('fs');
+  fs = require('fs'),
+  os = require('os'),
+  isWindows = os.platform() === 'win32';
+
 
 describe('lone', function(){
   var realLog = console.log;
@@ -29,7 +32,7 @@ describe('lone', function(){
   });
 
   it('should work with a zip appended to node', function(done){
-    lone(__dirname + '/fixtures/hello/.lone/dist/hello', function(err, res){
+    lone(__dirname + '/fixtures/hello/.lone/dist/hello' + (isWindows ? '.exe' : ''), function(err, res){
       if(err) return done(err);
 
       assert(fs.existsSync(res.dest + '/index.js'), 'did not unpack bundle');

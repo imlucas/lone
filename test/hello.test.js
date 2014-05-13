@@ -35,7 +35,7 @@ describe('hello', function(){
       config = res;
       child_process.exec(config.out, function(err, stdout){
         if(err) return done(err);
-        assert.equal(stdout.toString(), 'hello\n');
+        assert.equal(stdout.toString().replace('\n', ''), 'hello');
         done();
       });
     });
