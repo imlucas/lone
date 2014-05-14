@@ -27,7 +27,8 @@
     "glob": "^3.2.9",
     "minimatch": "^0.2.14",
     "fs-extra": "^0.8.1",
-    "jszip": "^2.2.0"
+    "jszip": "^2.2.0",
+    "diff-match-patch": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^1.17.1",
