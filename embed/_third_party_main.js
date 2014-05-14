@@ -1,5 +1,6 @@
 var fs = require('fs'),
   os = require('os'),
+  isWindows = os.platform() === 'win32',
   path = require('path'),
   embedded = false,
   AdmZip;
@@ -14,19 +15,34 @@ catch(e){
 
 function Lone(src, fn){
   this.src = src;
-  this.dest = path.join(os.tmpDir(), path.basename(this.src));
+  console.log('lone: src is', this.src);
+  this.dest = path.join(os.tmpDir(), path.basename(this.src.replace('.exe', '')));
+  if(isWindows){
+    this.dest = this.dest.replace('Temp\\', '');
+  }
+  console.log('lone: dest is', this.dest);
   this.pkg = {};
   this.bundle = undefined;
+  console.log('lone: extracting');
   this.extract(function(err, self){
+    console.log('lone: extracted', arguments);
     if(err) return fn(err);
-
-    fs.readFile(self.dest + '/package.json', 'utf-8', function(err, data){
+    console.log('lone: reading package.json', arguments);
+    fs.readFile(path.resolve(self.dest + '/package.json'), 'utf-8', function(err, data){
       if(err) return fn(err);
 
       self.pkg = JSON.parse(data);
+      console.log('lone: package data', self.pkg);
       var Module = require('module');
-      Module._load(path.resolve(self.dest, self.pkg.bin[self.pkg.name]), null, true);
-      fn(null, self);
+      console.log('lone: loading module', path.resolve(self.dest, self.pkg.bin[self.pkg.name]));
+      try{
+        Module._load(path.resolve(self.dest, self.pkg.bin[self.pkg.name]), null, true);
+        fn(null, self);
+      }
+      catch(e){
+        console.error('lone: failed to load module!', e);
+        process.exit(1);
+      }
     });
   });
 }
@@ -57,6 +73,7 @@ Lone.prototype.extract = function(fn){
       if(chunks.length === 0){
         return fn(new Error('lone: no bundle embedded in ' + self.src + '.  0 zip chunks found in binary.'));
       }
+      console.log('lone: extracting bundle to', self.dest);
       self.bundle = Buffer.concat(chunks);
       new AdmZip(self.bundle).extractAllTo(self.dest, true);
       fn(null, self);
@@ -66,8 +83,9 @@ Lone.prototype.extract = function(fn){
 if(embedded){
   new Lone(process.execPath, function(err){
     if(err){
-      return console.error('lonejs: failed to extract', err);
+      return console.error('lone: failed to extract', err);
     }
+    console.log('lone: app loaded');
   });
 }
 else {
