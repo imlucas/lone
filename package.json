@@ -17,18 +17,20 @@
   },
   "license": "MIT",
   "dependencies": {
-    "debug": "^0.7.4",
     "async": "^0.2.10",
-    "request": "^2.34.0",
-    "mkdirp": "^0.3.5",
     "combined-stream": "0.0.4",
-    "yargs": "^1.2.1",
-    "tar": "^0.1.19",
-    "glob": "^3.2.9",
-    "minimatch": "^0.2.14",
+    "debug": "^0.7.4",
+    "diff-match-patch": "^1.0.0",
     "fs-extra": "^0.8.1",
+    "glob": "^3.2.9",
     "jszip": "^2.2.0",
-    "diff-match-patch": "^1.0.0"
+    "minimatch": "^0.2.14",
+    "mkdirp": "^0.3.5",
+    "nconf": "^0.6.9",
+    "request": "^2.34.0",
+    "tar": "^0.1.19",
+    "untildify": "^0.1.0",
+    "yargs": "^1.2.1"
   },
   "devDependencies": {
     "mocha": "^1.17.1",
