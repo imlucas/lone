@@ -3,14 +3,6 @@ var derp = require('./lib/derp'),
 
 module.exports = function(opts, fn){
   var steps = [lone.configure(opts), lone.bundle, lone.compile];
-
-  if(opts.release){
-    steps.push(lone.release);
-    if(opts.mail){
-      steps.push(lone.notify);
-    }
-  }
-
   steps.push(fn);
   derp.sync.apply(derp, steps);
 };
