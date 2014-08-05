@@ -5,7 +5,8 @@ var assert = require('assert'),
 
 describe('hello', function(){
   var config = {
-    src: __dirname + '/fixtures/hello'
+    src: __dirname + '/fixtures/hello',
+    node: '0.10.29'
   };
 
   it('should create a manifest', function(done){

@@ -1,12 +1,12 @@
 var assert = require('assert'),
   fs = require('fs-extra'),
   child_process = require('child_process'),
-  lone = require('../'),
-  which = require('which');
+  lone = require('../');
 
 describe('bsonic', function(){
   var config = {
-    src: __dirname + '/fixtures/bsonic'
+    src: __dirname + '/fixtures/bsonic',
+    node: '0.10.29'
   };
 
   before(function(done){

@@ -11,7 +11,7 @@ describe('lone', function(){
     console.log = function(){
       console._counter = 1;
     };
-    require('../')({src: __dirname + '/fixtures/hello'}, function(){
+    require('../')({src: __dirname + '/fixtures/hello', node: '0.10.29'}, function(){
       done();
     });
   });
