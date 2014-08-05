@@ -1,27 +1,17 @@
 var assert = require('assert'),
   child_process = require('child_process'),
-  lone = require('../');
+  lone = require('../'),
+  path = require('path');
 
 describe('bsonic', function(){
-  var config = {
-    src: __dirname + '/fixtures/bsonic',
-    node: '0.10.29'
-  };
-
-  before(function(done){
-    child_process.exec('npm install', {cwd: config.src}, function(){
-      done();
-    });
-  });
+  after(path.remove.bind(null, path._additions));
 
   it('should deliver a runnable executable', function(done){
-    lone(config, function(err, res){
-      if(err) return done(err);
+    lone({src: __dirname + '/fixtures/bsonic', node: '0.10.29'}, function(err, res){
+      assert.ifError(err);
 
-      config = res;
-      child_process.exec(config.out, {env: {decode: 'DwAAABBsb25lAAEAAAAA'}}, function(err, stdout){
-        if(err) return done(err);
-
+      child_process.exec(res.out, {env: {decode: 'DwAAABBsb25lAAEAAAAA'}}, function(err, stdout){
+        assert.ifError(err);
         assert.equal(stdout.toString(), '{ lone: 1 }\n');
         done();
       });
