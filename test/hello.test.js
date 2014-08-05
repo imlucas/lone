@@ -7,6 +7,8 @@ describe('hello', function(){
     lone({src: __dirname + '/fixtures/hello', node: '0.10.29'}, function(err, res){
       if(err) return done(err);
 
+      assert.equal(res.ignore.length, 2, 'Should ignore lone and devDependencies');
+
       assert.equal(res.src, __dirname + '/fixtures/hello');
       child_process.exec(res.out, function(err, stdout){
         if(err) return done(err);

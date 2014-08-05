@@ -1,5 +1,4 @@
 var assert = require('assert'),
-  fs = require('fs-extra'),
   child_process = require('child_process'),
   lone = require('../');
 
@@ -15,48 +14,16 @@ describe('bsonic', function(){
     });
   });
 
-  it('should create a manifest', function(done){
-    lone.manifest(config, function(err, res){
-      if(err) return done(err);
-
-      config = res;
-      assert(config.manifest.files.length < 150);
-      done();
-    });
-  });
-
-  it('should create a zip file', function(done){
-    lone.bundle(config, function(err, res){
-      if(err) return done(err);
-      config = res;
-      try{
-        fs.existsSync(config.bundle);
-      }
-      catch(e){
-        return done(new Error(config.bundle + ' does not exist'));
-      }
-      done();
-    });
-  });
-
   it('should deliver a runnable executable', function(done){
     lone(config, function(err, res){
       if(err) return done(err);
 
       config = res;
-      child_process.exec(config.out, function(out, stdout, stderr){
+      child_process.exec(config.out, {env: {decode: 'DwAAABBsb25lAAEAAAAA'}}, function(err, stdout){
         if(err) return done(err);
-        if(stderr.toString().length > 0){
-          return done(new Error(stderr.toString() + '\nMake sure node-gyp is installed!\n\nsudo npm install -g node-gyp && rm -rf test/fixtures/bsonic/node_modules;\nAnd run tests again!'));
-        }
-        assert.equal(stdout.toString(), 'DwAAABBsb25lAAEAAAAA\n');
 
-        child_process.exec(config.out + ' DwAAABBsb25lAAEAAAAA', function(err, stdout){
-          if(err) return done(err);
-
-          assert.equal(stdout.toString(), '{ lone: 1 }\n');
-          done();
-        });
+        assert.equal(stdout.toString(), '{ lone: 1 }\n');
+        done();
       });
     });
   });
