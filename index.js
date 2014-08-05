@@ -3,7 +3,7 @@ var async = require('async'),
   config = require('./lib/config');
 
 module.exports = function(opts, fn){
-  async.series([lone.configure.bind(null, opts), lone.bundle, lone.compile], function(err){
+  async.series([lone.configure.bind(null, opts), lone.compile, lone.bundle, lone.deliver], function(err){
     return fn(err, config);
   });
 };

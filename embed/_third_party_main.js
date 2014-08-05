@@ -104,7 +104,7 @@ Lone.prototype.extract = function(fn){
 if(embedded){
   new Lone(process.execPath, function(err){
     if(err){
-      return console.error('lone: failed to extract', err);
+      return console.log('lone: nothing to extract', err);
     }
   });
 }
