@@ -4,7 +4,7 @@ var fs = require('fs'),
   lone = require('../'),
   yargs = require('yargs').usage([
     'Turn your node.js app into a single file executable.',
-    'Usage: lone'
+    'Usage: lone [options]'
   ].join('\n'))
   .options(lone.options);
 
