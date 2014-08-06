@@ -1,6 +1,11 @@
 {
   "name": "hello",
   "version": "0.0.0",
+  "description": "Fixture: The most basic `console.log` application",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imlucas/lone.git"
+  },
   "bin": {
     "hello": "./index.js"
   },

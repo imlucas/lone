@@ -1,6 +1,11 @@
 {
   "name": "bsonic",
   "version": "0.0.0",
+  "description": "Fixture: Check that binary add-ons work",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imlucas/lone.git"
+  },
   "bin": {
     "bsonic": "./bin/bsonic.js"
   },
