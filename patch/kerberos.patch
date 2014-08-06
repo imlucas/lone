@@ -1,3 +1,0 @@
-@@ -1,211 +1,21 @@
--// Get the Kerberos library%0Amodule.exports = require('./lib/kerberos');%0A// Set up the auth processes%0Amodule.exports%5B'processes'%5D = %7B%0A  MongoAuthProcess: require('./lib/auth_processes/mongodb').MongoAuthProcess%0A%7D
-+module.exports = %7B%7D;%0A

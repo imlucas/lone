@@ -1,8 +1,0 @@
-@@ -7,552 +7,8 @@
- on =
-- null;%0A%0Atry %7B%0A%09// Load the precompiled win32 binary%0A%09if(process.platform == %22win32%22 && process.arch == %22x64%22) %7B%0A%09  bson = require('./win32/x64/bson');  %0A%09%7D else if(process.platform == %22win32%22 && process.arch == %22ia32%22) %7B%0A%09  bson = require('./win32/ia32/bson');  %0A%09%7D else %7B%0A%09  bson = require('../build/Release/bson');  %0A%09%7D%09%0A%7D catch(err) %7B%0A%09// Attempt to load the release bson version%0A%09try %7B%0A%09%09bson = require('../build/Release/bson');%0A%09%7D catch (err) %7B%0A%09%09console.error(%22js-bson: Failed to load c++ bson extension, using pure JS version%22);%0A%09%09bson =
-  req
-@@ -37,14 +37,8 @@
- ');%0A
--%09%7D%0A%7D%0A%0A
- expo
