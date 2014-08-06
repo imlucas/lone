@@ -1,5 +1,8 @@
 # lone.js
 
+[![build status](https://secure.travis-ci.org/imlucas/lone.png)](http://travis-ci.org/imlucas/lone)
+
+
 Turn node.js apps into standalone executables, with cross-platform and
 binary add-on support.
 
