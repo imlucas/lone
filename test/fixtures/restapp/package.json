@@ -1,0 +1,20 @@
+{
+  "name": "restapp",
+  "version": "0.0.0",
+  "description": "Fixture: Make sure a binary stays running",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imlucas/lone.git"
+  },
+  "bin": {
+    "restapp": "./index.js"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1"
+  },
+  "dependencies": {
+    "express": "^4.8.0",
+    "mongodb": "^1.4.8",
+    "socket.io": "^1.0.6"
+  }
+}
