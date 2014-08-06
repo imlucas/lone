@@ -6,8 +6,7 @@ var async = require('async'),
 module.exports = function(opts, fn){
   async.series([lone.configure.bind(null, opts), lone.compile, lone.bundle, lone.deliver], function(err){
     var res = extend(true, {}, config);
-    config = {};
-
+    config.__reset__();
     return fn(err, res);
   });
 };
