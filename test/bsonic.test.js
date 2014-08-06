@@ -9,7 +9,6 @@ describe('bsonic', function(){
   it('should deliver a runnable executable', function(done){
     lone({src: __dirname + '/fixtures/bsonic', node: '0.10.29'}, function(err, res){
       assert.ifError(err);
-      console.log('complete!  trying to run', res.out);
       child_process.exec(res.out, {env: {decode: 'DwAAABBsb25lAAEAAAAA'}}, function(err, stdout){
         assert.ifError(err);
         assert.equal(stdout.toString(), '{ lone: 1 }\n');

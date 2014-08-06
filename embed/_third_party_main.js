@@ -15,67 +15,62 @@ catch(e){
   embedded = true;
 }
 
-function Lone(src, fn){
+function Lone(src){
   if(!(this instanceof Lone)) return new Lone(src);
   Lone.super_.call(this);
 
+  console.log('lone started', this.src);
   this.src = src;
   this.dest = path.join(os.tmpDir(), path.basename(this.src.replace('.exe', '')));
-  if(isWindows){
-    this.dest = this.dest.replace('Temp\\', '');
-  }
-  this.pkg = {};
+  if(isWindows) this.dest = this.dest.replace('Temp\\', '');
+
+  this.pkg = null;
   this.bundle = undefined;
   this.extract(function(err){
-    if(err) return this.main();
+    if(err) return this._main();
 
-    fs.readFile(path.resolve(self.dest + '/package.json'), 'utf-8', function(err, data){
-      if(err) return this.main();
+    fs.readFile(path.resolve(this.dest + '/package.json'), 'utf-8', function(err, data){
+      if(data) this.pkg = JSON.parse(data);
+      this._main();
 
-      self.pkg = JSON.parse(data);
-      if (process.argv[1] == 'debug') {
-        // Start the debugger agent
-        var d = require('_debugger');
-        d.start();
-      } else if (process.argv[1]) {
-        // make process.argv[1] into a full path
-        var path = require('path');
-        process.argv[1] = path.resolve(process.argv[1]);
-        if (process.env.NODE_UNIQUE_ID) {
-          var cluster = require('cluster');
-          cluster._setupWorker();
-          delete process.env.NODE_UNIQUE_ID;
-        }
-
-        if (global.v8debug && process.execArgv.some(function(arg) {
-              return arg.match(/^--debug-brk(=[0-9]*)?$/);
-            })) {
-          var debugTimeout = +process.env.NODE_DEBUG_TIMEOUT || 50;
-          return setTimeout(main, debugTimeout);
-        }
-        return self.main();
-      } else {
-        self.main();
-      }
-      process._tickCallback();
     }.bind(this));
   }.bind(this));
 }
 util.inherits(Lone, EventEmitter);
 
-Lone.prototype.main = function(){
-  var Module = require('module'),
-    src = path.resolve(this.dest, this.pkg.bin[this.pkg.name]);
-  if(process.argv[1]) src = process.argv[1];
+Lone.prototype._main = function(){
+  if (process.argv[1] === 'debug') {
+    // Start the debugger agent
+    var d = require('_debugger');
+    d.start();
+  }
+  else if (process.argv[1]) {
+    // make process.argv[1] into a full path
+    process.argv[1] = path.resolve(process.argv[1]);
+    if (process.env.NODE_UNIQUE_ID) {
+      var cluster = require('cluster');
+      cluster._setupWorker();
+      delete process.env.NODE_UNIQUE_ID;
+    }
 
-  try{
-    Module._load(src, null, true);
+    if (global.v8debug && process.execArgv.some(function(arg) {
+          return arg.match(/^--debug-brk(=[0-9]*)?$/);
+        })) {
+      var debugTimeout = +process.env.NODE_DEBUG_TIMEOUT || 50;
+      return setTimeout(this._load.bind(this), debugTimeout);
+    }
+    this._load(process.argv[1]);
   }
-  catch(e){
-    console.error('lone: failed to load module!', e);
-    process.exit(1);
+  else if(this.pkg){
+    this._load(path.resolve(this.dest, this.pkg.bin[this.pkg.name]));
   }
-}
+  process._tickCallback();
+};
+
+Lone.prototype._load = function(src){
+  var Module = require('module');
+  Module._load(src, null, true);
+};
 
 // find a buffer from `this.src` that looks like a zip file,
 // possibly inside another file and extract it to `this.dest`.
@@ -115,8 +110,5 @@ if(embedded){
 }
 else {
   // we're running as a normal node module
-  module.exports = function(src, fn){
-    return new Lone(src, fn);
-  };
-  module.exports.Lone = Lone;
+  module.exports = Lone;
 }
