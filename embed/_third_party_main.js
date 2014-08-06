@@ -3,6 +3,8 @@ var fs = require('fs'),
   isWindows = os.platform() === 'win32',
   path = require('path'),
   embedded = false,
+  util = require('util'),
+  EventEmitter = require('events').EventEmitter,
   AdmZip;
 
 try{
@@ -14,6 +16,9 @@ catch(e){
 }
 
 function Lone(src, fn){
+  if(!(this instanceof Lone)) return new Lone(src);
+  Lone.super_.call(this);
+
   this.src = src;
   this.dest = path.join(os.tmpDir(), path.basename(this.src.replace('.exe', '')));
   if(isWindows){
@@ -21,10 +26,11 @@ function Lone(src, fn){
   }
   this.pkg = {};
   this.bundle = undefined;
-  this.extract(function(err, self){
-    if(err) return fn(err);
+  this.extract(function(err){
+    if(err) return this.main();
+
     fs.readFile(path.resolve(self.dest + '/package.json'), 'utf-8', function(err, data){
-      if(err) return fn(err);
+      if(err) return this.main();
 
       self.pkg = JSON.parse(data);
       if (process.argv[1] == 'debug') {
@@ -47,19 +53,21 @@ function Lone(src, fn){
           var debugTimeout = +process.env.NODE_DEBUG_TIMEOUT || 50;
           return setTimeout(main, debugTimeout);
         }
-        return main(self);
+        return self.main();
       } else {
-        main(self);
+        self.main();
       }
       process._tickCallback();
-      fn(null, self);
-    });
-  });
+    }.bind(this));
+  }.bind(this));
 }
+util.inherits(Lone, EventEmitter);
 
-function main(self){
+Lone.prototype.main = function(){
   var Module = require('module'),
-    src = process.argv[1] ? process.argv[1] : path.resolve(self.dest, self.pkg.bin[self.pkg.name]);
+    src = path.resolve(this.dest, this.pkg.bin[this.pkg.name]);
+  if(process.argv[1]) src = process.argv[1];
+
   try{
     Module._load(src, null, true);
   }
@@ -93,20 +101,17 @@ Lone.prototype.extract = function(fn){
     })
     .on('end', function(){
       if(chunks.length === 0){
-        return fn(new Error('lone: no bundle embedded in ' + self.src + '.  0 zip chunks found in binary.'));
+        return fn(new Error('0 zip chunks found in binary.'));
       }
+
       self.bundle = Buffer.concat(chunks);
       new AdmZip(self.bundle).extractAllTo(self.dest, true);
-      fn(null, self);
+      fn();
     });
 };
 
 if(embedded){
-  new Lone(process.execPath, function(err){
-    if(err){
-      return console.log('lone: nothing to extract', err);
-    }
-  });
+  new Lone(process.execPath);
 }
 else {
   // we're running as a normal node module
