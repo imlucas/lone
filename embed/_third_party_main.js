@@ -19,7 +19,6 @@ function Lone(src){
   if(!(this instanceof Lone)) return new Lone(src);
   Lone.super_.call(this);
 
-  console.log('lone started', this.src);
   this.src = src;
   this.dest = path.join(os.tmpDir(), path.basename(this.src.replace('.exe', '')));
   if(isWindows) this.dest = this.dest.replace('Temp\\', '');
