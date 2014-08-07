@@ -1,6 +1,6 @@
 {
   "name": "lone",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
