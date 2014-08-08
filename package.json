@@ -4,7 +4,7 @@
   "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
-    "test": "DEBUG=* mocha --timeout 600000",
+    "test": "mocha --timeout 600000",
     "build": "lone"
   },
   "homepage": "http://github.com/imlucas/lone",
