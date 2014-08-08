@@ -11,7 +11,7 @@ describe('restapp', function(){
   });
 
   it('should create a binary', function(done){
-    lone({src: __dirname + '/fixtures/restapp', node: '0.10.29'}, function(err, res){
+    lone({cache: __dirname + '/.lone', src: __dirname + '/fixtures/restapp'}, function(err, res){
       bin = res.out;
       done(err);
     });
