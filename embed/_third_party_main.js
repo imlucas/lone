@@ -43,7 +43,7 @@ Lone.prototype._main = function(){
     var d = require('_debugger');
     d.start();
   }
-  else if (process.argv[1]) {
+  else if (process.argv[1] && fs.existsSync(path.resolve(process.argv[1]))) {
     // make process.argv[1] into a full path
     process.argv[1] = path.resolve(process.argv[1]);
     if (process.env.NODE_UNIQUE_ID) {
@@ -67,6 +67,11 @@ Lone.prototype._main = function(){
 };
 
 Lone.prototype._load = function(src){
+  // XXX - make yargs/optimist/etc happy
+  if(process.argv[0].indexOf('node') === -1){
+    process.argv.unshift('node');
+  }
+
   var Module = require('module');
   Module._load(src, null, true);
 };
