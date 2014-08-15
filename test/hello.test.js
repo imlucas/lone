@@ -6,7 +6,7 @@ var assert = require('assert'),
 describe('hello', function(){
   after(path.remove.bind(null, path._additions));
   it('should deliver a runnable executable', function(done){
-    lone({cache: __dirname + '/.lone', src: __dirname + '/fixtures/hello'}, function(err, res){
+    lone({cache: __dirname + '/.lone', node: 'unstable', src: __dirname + '/fixtures/hello'}, function(err, res){
       assert.ifError(err);
 
       assert.equal(res.ignore.length, 2, 'Should ignore lone and devDependencies');
