@@ -1,0 +1,26 @@
+{
+  "name": "myapp",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "mocha",
+    "dist": "lone --node=unstable"
+  },
+  "bin": {
+    "myapp": "bin/myapp.js"
+  },
+  "lone": {
+    "icon": "myapp.ico",
+    "ignore": [
+      "gulpfile.js",
+      "README.md",
+      "test/**"
+    ]
+  },
+  "dependencies": {
+    "mongodb": "^1.4.8"
+  },
+  "devDependencies": {
+    "lone": "^0.3.4",
+    "mocha": "^1.21.4"
+  }
+}

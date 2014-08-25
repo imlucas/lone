@@ -106,3 +106,32 @@ on GitHub without having to mess around with windows paths or cygwin.
 ## License
 
 MIT
+
+## Continuum of making computers do things
+
+3 classes of solutions: cli, "status bar", gui.
+
+Naive model of methods for implementing solutions:
+
+- scripts: perl, bash, python, BAT
+- module: publish to pypi, npm, artifactory, etc
+- native cli: c*, qt, many-others, way it's always been done
+- dynamic cli: `lone`, `go compile`
+- dynamic gui: node-webkit, atom-shell, brackets-shell
+- native gui: Cocoa, winfx
+
+|      class       |      upsides      |                  downsides                  |
+| :--------------- | :---------------- | :------------------------------------------ |
+| script           | worksforme        | 30 scripts to start mongod and none correct |
+| module           | reusable in web   | need toolchain, language bias, etc          |
+| native cli       | what people want. | hard, expensive                             |
+| dynamic cli      | what people want. | emerging                                    |
+| dynamic gui      | what people want. | emerging                                    |
+| native gui       | what people want. | really really hard                          |
+
+## Status Bar Apps
+
+Usually a feature of native gui apps, "status bar" apps (eg cloudup, dropbox, etc)
+should have a home of their own rather than glumping into lone's scope.
+This statusbar module might use lone under the hood, but definitely needs to
+be separate.  [Rumps](https://github.com/jaredks/rumps) is an example python impl.
