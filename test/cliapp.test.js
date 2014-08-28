@@ -9,7 +9,7 @@ describe('cliapp', function(){
 
   after(path.remove.bind(null, path._additions));
   it('should deliver a runnable executable', function(done){
-    lone({cache: __dirname + '/.lone', node: 'unstable', src: __dirname + '/fixtures/cliapp'}, function(err, res){
+    lone({cache: __dirname + '/.lone', src: __dirname + '/fixtures/cliapp'}, function(err, res){
       assert.ifError(err);
       bin = res.out;
 
