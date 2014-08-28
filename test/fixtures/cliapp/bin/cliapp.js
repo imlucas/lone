@@ -69,6 +69,16 @@ else if(argv._[0] && (argv._[0] !== 'ls')){
 else {
   mvm.current(function(err, current){
     mvm.installed(function(err, versions){
+      if(err){
+        console.error(err);
+        return process.exit(1);
+      }
+
+      if(!versions || versions.length <1){
+        console.log('  no versions installed');
+        return process.exit(0);
+      }
+
       console.log(versions.map(function(v){
         if(v === current){
           return '  \033[32mο\033[0m '+v+' \033[90m \033[0m';
