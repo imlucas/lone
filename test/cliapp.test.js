@@ -16,9 +16,10 @@ describe('cliapp', function(){
       var cmd = bin;
       debug('run:', cmd);
       child_process.exec(cmd, function(err, stdout, stderr){
-        assert.ifError(err);
         debug('stdout:', stdout.toString());
         debug('stderr:', stderr.toString());
+        debug('err: ', err);
+        assert.ifError(err);
         done();
       });
     });
@@ -27,10 +28,11 @@ describe('cliapp', function(){
     var cmd = bin + ' help';
     debug('run:', cmd);
     child_process.exec(cmd, function(err, stdout, stderr){
-      assert.ifError(err);
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
-      assert(stderr.toString().indexOf('argv {"_":["help"]') === 0, 'argv._[0] not `help`: ' + stderr.toString());
+      debug('err: ', err);
+      assert.ifError(err);
+      assert(stderr.toString().indexOf('argv { _: [ \'help\' ]') === 0, 'argv._[0] not `help`: ' + stderr.toString());
       done();
     });
   });
@@ -39,9 +41,10 @@ describe('cliapp', function(){
     var cmd = bin + ' --help';
     debug('run:', cmd);
     child_process.exec(cmd, function(err, stdout, stderr){
-      assert.ifError(err);
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
+      debug('err: ', err);
+      assert.ifError(err);
       assert(stdout.toString().indexOf('Usage: node') === -1, 'nodejs intercepted help argv');
       done();
     });
@@ -51,9 +54,10 @@ describe('cliapp', function(){
     var cmd = bin + ' -h';
     debug('run:', cmd);
     child_process.exec(cmd, function(err, stdout, stderr){
-      assert.ifError(err);
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
+      debug('err: ', err);
+      assert.ifError(err);
       assert(stdout.toString().indexOf('Usage: node') === -1, 'nodejs intercepted help argc');
       done();
     });

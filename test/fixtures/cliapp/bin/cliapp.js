@@ -19,7 +19,8 @@ var mvm = require('mongodb-version-manager'),
 
     ,
   argv = yargs.argv;
-console.error('argv', JSON.stringify(argv));
+
+console.error('argv', argv);
 
 if(argv.h || argv.help || (argv._[0] && argv._[0] === 'help')) return yargs.showHelp();
 
