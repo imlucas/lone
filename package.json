@@ -28,7 +28,7 @@
     "minimatch": "^0.2.14",
     "mkdirp": "^0.3.5",
     "request": "^2.53.0",
-    "resolve-node-version": "0.0.1",
+    "resolve-node-version": "^0.0.2",
     "semver": "^3.0.1",
     "tar": "^0.1.19",
     "untildify": "^1.0.0",
