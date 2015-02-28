@@ -1,6 +1,7 @@
 # lone.js
 
-[![build status](https://secure.travis-ci.org/imlucas/lone.png)](http://travis-ci.org/imlucas/lone)
+[![linux build status](https://secure.travis-ci.org/imlucas/lone.png)](http://travis-ci.org/imlucas/lone)
+[![windows build status](https://ci.appveyor.com/api/projects/status/github/imlucas/lone)](https://ci.appveyor.com/project/imlucas/lone)
 
 
 Turn node.js apps into standalone executables, with cross-platform and
