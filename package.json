@@ -32,12 +32,12 @@
     "semver": "^3.0.1",
     "tar": "^0.1.19",
     "untildify": "^1.0.0",
-    "yargs": "^1.2.1"
+    "yargs": "^1.2.1",
+    "which": "^1.0.9"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-zip": "^0.1.2",
-    "mocha": "^2.1.0",
-    "which": "^1.0.9"
+    "mocha": "^2.1.0"
   }
 }
