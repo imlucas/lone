@@ -136,3 +136,9 @@ Usually a feature of native gui apps, "status bar" apps (eg cloudup, dropbox, et
 should have a home of their own rather than glumping into lone's scope.
 This statusbar module might use lone under the hood, but definitely needs to
 be separate.  [Rumps](https://github.com/jaredks/rumps) is an example python impl.
+
+[BitBar][bitbar] is another exciting new project to solve this need.  When paired with
+[@sindresorhus/bitbar][bitbar js], writing these apps could not be much easier.
+
+[bitbar js]: https://github.com/sindresorhus/bitbar 
+[bitbar]: https://github.com/matryer/bitbar
