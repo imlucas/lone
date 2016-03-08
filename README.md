@@ -1,11 +1,6 @@
-# lone.js
+# lone [![][travis_img]][travis_url] [![][appv_img]][appv_url] [![][npm_img]][npm_url]
 
-[![linux build status](https://secure.travis-ci.org/imlucas/lone.png)](http://travis-ci.org/imlucas/lone)
-[![windows build status](https://ci.appveyor.com/api/projects/status/github/imlucas/lone)](https://ci.appveyor.com/project/imlucas/lone)
-
-
-Turn node.js apps into standalone executables, with cross-platform and
-binary add-on support.
+> Turn node.js apps into standalone executables.
 
 ```
 npm install -g lone && lone ./path-to-app;
@@ -142,3 +137,11 @@ be separate.  [Rumps](https://github.com/jaredks/rumps) is an example python imp
 
 [bitbar js]: https://github.com/sindresorhus/bitbar 
 [bitbar]: https://github.com/matryer/bitbar
+
+
+[travis_img]: https://secure.travis-ci.org/mongodb-js/lone.png
+[travis_url]: https://travis-ci.org/mongodb-js/lone
+[npm_img]: https://img.shields.io/npm/v/lone.svg?style=flat-square
+[npm_url]: https://www.npmjs.org/package/lone
+[appv_img]: https://ci.appveyor.com/api/projects/status/github/imlucas/lone
+[appv_url]: https://ci.appveyor.com/project/imlucas/lone
