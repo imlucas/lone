@@ -1,67 +1,37 @@
 var assert = require('assert');
-var exec = require('child_process').exec;
-var lone = require('../');
-var path = require('path');
-var debug = require('debug')('lone:test:cliapp');
+var helpers = require('../helpers');
+var compile = helpers.compileFixture;
+var run = helpers.runFixtureBinary;
 
 describe('cliapp', function() {
-  var bin;
-
-  after(path.remove.bind(null, path._additions));
-  it('should deliver a runnable executable', function(done) {
-    lone({
-      cache: path.join(__dirname, '.lone'),
-      src: path.join(__dirname, 'fixtures', 'cliapp')
-    }, function(err, res) {
-      assert.ifError(err);
-      bin = res.out;
-
-      var cmd = bin;
-      debug('run:', cmd);
-      exec(cmd, function(_err, stdout, stderr) {
-        debug('stdout:', stdout.toString());
-        debug('stderr:', stderr.toString());
-        debug('err: ', err);
-        assert.ifError(_err);
-        done();
-      });
-    });
+  after(helpers.after);
+  it('should compile', function(done) {
+    compile('cliapp', done);
   });
+
   it('should show help when `./cliapp help` is run', function(done) {
-    var cmd = bin + ' help';
-    debug('run:', cmd);
-    exec(cmd, function(err, stdout, stderr) {
-      debug('stdout:', stdout.toString());
-      debug('stderr:', stderr.toString());
-      debug('err: ', err);
+    run('cliapp', ['help'], function(err, stdout, stderr) {
       assert.ifError(err);
-      assert(stderr.toString().indexOf('argv { _: [ \'help\' ]') === 0, 'argv._[0] not `help`: ' + stderr.toString());
+      assert(stderr.toString().indexOf('argv { _: [ \'help\' ]') === 0,
+        'argv._[0] not `help`: ' + stderr.toString());
       done();
     });
   });
 
   it('should show help when `./cliapp --help` is run', function(done) {
-    var cmd = bin + ' --help';
-    debug('run:', cmd);
-    exec(cmd, function(err, stdout, stderr) {
-      debug('stdout:', stdout.toString());
-      debug('stderr:', stderr.toString());
-      debug('err: ', err);
+    run('cliapp', ['--help'], function(err, stdout) {
       assert.ifError(err);
-      assert(stdout.toString().indexOf('Usage: node') === -1, 'nodejs intercepted help argv');
+      assert(stdout.toString().indexOf('Usage: node') === -1,
+        'nodejs intercepted help argv.  compile#argvPatch failed :/');
       done();
     });
   });
 
   it('should show help when `./cliapp -h` is run', function(done) {
-    var cmd = bin + ' -h';
-    debug('run:', cmd);
-    exec(cmd, function(err, stdout, stderr) {
-      debug('stdout:', stdout.toString());
-      debug('stderr:', stderr.toString());
-      debug('err: ', err);
+    run('cliapp', ['--help'], function(err, stdout) {
       assert.ifError(err);
-      assert(stdout.toString().indexOf('Usage: node') === -1, 'nodejs intercepted help argc');
+      assert(stdout.toString().indexOf('Usage: node') === -1,
+        'nodejs intercepted help argv.  compile#argvPatch failed :/');
       done();
     });
   });
