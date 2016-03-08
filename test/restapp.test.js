@@ -1,5 +1,6 @@
 var assert = require('assert');
 var spawn = require('child_process').spawn;
+var path = require('path');
 var lone = require('../');
 var debug = require('debug')('lone:test:restapp');
 var request = require('request');
@@ -14,8 +15,8 @@ describe('restapp', function() {
 
   it('should create a binary', function(done) {
     lone({
-      cache: __dirname + '/.lone',
-      src: __dirname + '/fixtures/restapp'
+      cache: path.join(__dirname, '.lone'),
+      src: path.join(__dirname, 'fixtures', 'restapp')
     }, function(err, res) {
       bin = res.out;
       done(err);

@@ -1,7 +1,7 @@
 var assert = require('assert');
-var child_process = require('child_process');
-var lone = require('../');
 var path = require('path');
+var exec = require('child_process').exec;
+var lone = require('../');
 var debug = require('debug')('lone:test:bsonic');
 
 /**
@@ -14,18 +14,18 @@ describe.skip('bsonic', function() {
 
   it('should deliver a runnable executable', function(done) {
     lone({
-      cache: __dirname + '/.lone',
-      src: __dirname + '/fixtures/bsonic'
+      cache: path.join(__dirname, '.lone'),
+      src: path.join(__dirname, 'fixtures', 'bsonic')
     }, function(err, res) {
       assert.ifError(err);
-      child_process.exec(res.out, {
+      exec(res.out, {
         env: {
           decode: 'DwAAABBsb25lAAEAAAAA'
         }
-      }, function(err, stdout, stderr) {
+      }, function(_err, stdout, stderr) {
         debug('stderr', stderr.toString());
         debug('stdout', stdout.toString());
-        assert.ifError(err);
+        assert.ifError(_err);
         assert.equal(stdout.toString(), '{ lone: 1 }\n');
         done();
       });

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var child_process = require('child_process');
+var exec = require('child_process').exec;
 var lone = require('../');
 var path = require('path');
 var debug = require('debug')('lone:test:cliapp');
@@ -10,19 +10,19 @@ describe('cliapp', function() {
   after(path.remove.bind(null, path._additions));
   it('should deliver a runnable executable', function(done) {
     lone({
-      cache: __dirname + '/.lone',
-      src: __dirname + '/fixtures/cliapp'
+      cache: path.join(__dirname, '.lone'),
+      src: path.join(__dirname, 'fixtures', 'cliapp')
     }, function(err, res) {
       assert.ifError(err);
       bin = res.out;
 
       var cmd = bin;
       debug('run:', cmd);
-      child_process.exec(cmd, function(err, stdout, stderr) {
+      exec(cmd, function(_err, stdout, stderr) {
         debug('stdout:', stdout.toString());
         debug('stderr:', stderr.toString());
         debug('err: ', err);
-        assert.ifError(err);
+        assert.ifError(_err);
         done();
       });
     });
@@ -30,7 +30,7 @@ describe('cliapp', function() {
   it('should show help when `./cliapp help` is run', function(done) {
     var cmd = bin + ' help';
     debug('run:', cmd);
-    child_process.exec(cmd, function(err, stdout, stderr) {
+    exec(cmd, function(err, stdout, stderr) {
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
       debug('err: ', err);
@@ -43,7 +43,7 @@ describe('cliapp', function() {
   it('should show help when `./cliapp --help` is run', function(done) {
     var cmd = bin + ' --help';
     debug('run:', cmd);
-    child_process.exec(cmd, function(err, stdout, stderr) {
+    exec(cmd, function(err, stdout, stderr) {
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
       debug('err: ', err);
@@ -56,7 +56,7 @@ describe('cliapp', function() {
   it('should show help when `./cliapp -h` is run', function(done) {
     var cmd = bin + ' -h';
     debug('run:', cmd);
-    child_process.exec(cmd, function(err, stdout, stderr) {
+    exec(cmd, function(err, stdout, stderr) {
       debug('stdout:', stdout.toString());
       debug('stderr:', stderr.toString());
       debug('err: ', err);

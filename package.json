@@ -8,7 +8,8 @@
     "check": "mongodb-js-precommit {bin,lib,test}/*.js",
     "ci": "npm run check && npm test",
     "fmt": "mongodb-js-fmt {bin,lib,test}/*.js",
-    "test": "mocha"
+    "test": "mocha",
+    "postuninstall": " rm -rf test/.lone/ test/fixtures/**/node_modules/ test/fixtures/**/.lone"
   },
   "homepage": "http://github.com/mongodb-js/lone",
   "repository": {
