@@ -4,13 +4,16 @@
   "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
   "description": "Turn node.js apps into standalone executables.",
   "scripts": {
-    "test": "mocha",
-    "build": "lone"
+    "build": "lone",
+    "check": "mongodb-js-precommit {bin,lib,test}/*.js",
+    "ci": "npm run check && npm test",
+    "fmt": "mongodb-js-fmt {bin,lib,test}/*.js",
+    "test": "mocha"
   },
-  "homepage": "http://github.com/imlucas/lone",
+  "homepage": "http://github.com/mongodb-js/lone",
   "repository": {
     "type": "git",
-    "url": "git://github.com/imlucas/lone.git"
+    "url": "git://github.com/mongodb-js/lone.git"
   },
   "bin": {
     "lone": "./bin/lone.js"
@@ -36,8 +39,11 @@
     "which": "^1.0.9"
   },
   "devDependencies": {
+    "eslint-config-mongodb-js": "^2.0.0",
     "gulp": "^3.8.11",
     "gulp-zip": "^3.0.2",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "mongodb-js-fmt": "0.0.3",
+    "mongodb-js-precommit": "^0.2.8"
   }
 }

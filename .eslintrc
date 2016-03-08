@@ -1,0 +1,12 @@
+{
+  "extends": ["mongodb-js/node"],
+  "rules": {
+    "no-path-concat": 1,
+    "camelcase": 1,
+    "no-shadow": 1,
+    "no-console": 1,
+    "no-multiple-empty-lines": 1,
+    "no-empty": 1,
+    "new-cap": 1
+  }
+}

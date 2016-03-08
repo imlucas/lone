@@ -1,4 +1,9 @@
+sudo: false
 language: node_js
 node_js:
-  - "0.10"
+  - 5
 env: DEBUG=lone*
+script: npm run-script ci
+cache:
+  directories:
+  - node_modules

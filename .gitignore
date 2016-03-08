@@ -4,3 +4,4 @@ node_modules
 vagrant/.vagrant
 test/.lone
 test/fixtures/**/.lone
+npm-debug.log
