@@ -9,7 +9,7 @@ describe('cliapp', function() {
     compile('cliapp', done);
   });
 
-  it('should show help when `./cliapp help` is run', function(done) {
+  it.skip('should show help when `./cliapp help` is run', function(done) {
     run('cliapp', ['help'], function(err, stdout, stderr) {
       assert.ifError(err);
       assert(stderr.toString().indexOf('argv { _: [ \'help\' ]') === 0,
