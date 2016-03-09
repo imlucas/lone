@@ -1,5 +1,5 @@
 var assert = require('assert');
-var helpers = require('../helpers');
+var helpers = require('./helpers');
 
 describe('hello', function() {
   after(helpers.after);
