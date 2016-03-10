@@ -1,9 +1,15 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
   - 5
-env: DEBUG=lone*
+env: DEBUG=lone* CXX=g++-4.8 CI=1
 script: npm run-script ci
 cache:
   directories:
   - node_modules
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
