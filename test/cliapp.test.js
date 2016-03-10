@@ -9,10 +9,10 @@ describe('cliapp', function() {
     compile('cliapp', done);
   });
 
-  it.skip('should show help when `./cliapp help` is run', function(done) {
+  it('should show help when `./cliapp help` is run', function(done) {
     run('cliapp', ['help'], function(err, stdout, stderr) {
       assert.ifError(err);
-      assert(stderr.toString().indexOf('argv { _: [ \'help\' ]') === 0,
+      assert(stderr.toString('utf-8').indexOf('help') > -1,
         'argv._[0] not `help`: ' + stderr.toString());
       done();
     });

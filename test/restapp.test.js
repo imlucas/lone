@@ -1,29 +1,23 @@
 var assert = require('assert');
-var spawn = require('child_process').spawn;
-var path = require('path');
-var lone = require('../');
+var helpers = require('./helpers');
 var debug = require('debug')('lone:test:restapp');
 var request = require('request');
 
 describe('restapp', function() {
-  var bin;
   var proc;
   var url;
-  after(function() {
+
+  after(function(done) {
     proc.kill();
+    helpers.after(done);
   });
 
-  it('should create a binary', function(done) {
-    lone({
-      cache: path.join(__dirname, '.lone'),
-      src: path.join(__dirname, 'fixtures', 'restapp')
-    }, function(err, res) {
-      bin = res.out;
-      done(err);
-    });
+  it('should compile', function(done) {
+    helpers.compileFixture('restapp', done);
   });
+
   it('should start the http server', function(done) {
-    proc = spawn(bin);
+    proc = helpers.spawnFixtureBinary('restapp');
     proc.stdout.on('data', function(buf) {
       var msgs = buf.toString().split('\n');
       msgs.map(function(msg) {

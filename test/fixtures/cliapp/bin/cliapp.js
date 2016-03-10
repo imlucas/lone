@@ -1,28 +1,33 @@
 #!/usr/bin/env node
 
-var mvm = require('mongodb-version-manager'),
-  yargs = require('yargs')
-    .usage('Usage: $0 [options] [COMMAND]')
-    .describe('stable', 'Print latest stable version of MongoDB')
-    .describe('unstable', 'Print latest unstable version of MongoDB')
-    .describe('version', 'Any semver version string or query')
-    .describe('url', 'Print the download URL')
-    .example('m --stable --url', 'Print download URL for the latest stable version')
-    .example('m --unstable', 'Print latest unstable version')
-    .example('m stable [config]', 'Install or activate the latest stable MongoDB release')
-    .example('m latest [config]', 'Install or activate the latest unstable MongoDB release')
-    .example('m <version> [config]', 'Install or activate MongoDB <version>')
-    .example('m shell', 'Open a MongoDB shell')
-    .example('export PATH=`m path`:$PATH', 'Open a MongoDB shell')
-    .example('m d', 'Start mongod in the foreground')
-    .example('m --version="2.4.*"', 'Print latest 2.4 series version')
+/* eslint no-console: 0 */
 
-    ,
-  argv = yargs.argv;
+var mvm = require('mongodb-version-manager');
+var yargs = require('yargs')
+  .usage('Usage: $0 [options] [COMMAND]')
+  .describe('stable', 'Print latest stable version of MongoDB')
+  .describe('unstable', 'Print latest unstable version of MongoDB')
+  .describe('version', 'Any semver version string or query')
+  .describe('url', 'Print the download URL')
+  .example('m --stable --url', 'Print download URL for the latest stable version')
+  .example('m --unstable', 'Print latest unstable version')
+  .example('m stable [config]', 'Install or activate the latest stable MongoDB release')
+  .example('m latest [config]', 'Install or activate the latest unstable MongoDB release')
+  .example('m <version> [config]', 'Install or activate MongoDB <version>')
+  .example('m shell', 'Open a MongoDB shell')
+  .example('export PATH=`m path`:$PATH', 'Open a MongoDB shell')
+  .example('m d', 'Start mongod in the foreground')
+  .example('m --version="2.4.*"', 'Print latest 2.4 series version')
+  .help('help')
+  .command('help', 'Show help', function() {
+    console.error('help');
+    yargs.showHelp();
+    process.exit(0);
+  });
+
+var argv = yargs.argv;
 
 console.error('argv', argv);
-
-if(argv.h || argv.help || (argv._[0] && argv._[0] === 'help')) return yargs.showHelp();
 
 var version = argv.version;
 if(argv.stable) version = 'stable';
