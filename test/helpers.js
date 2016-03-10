@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var format = require('util').format;
 var debug = require('debug')('lone:test:helpers');
+var isWindows = process.platform === 'win32';
 
 /**
  * TODO (imlucas) Fix path.remove(path._additions)
@@ -29,6 +30,9 @@ exports.runFixtureBinary = function(name, args, done) {
   }
 
   var BIN = path.join(__dirname, 'fixtures', name, '.lone', 'dist', name);
+  if (isWindows) {
+    BIN += '.exe';
+  }
   debug('fixture binary for `%s` at `%s`', name, BIN);
   debug('exec `%s` with args `%s`', BIN, args);
   fs.exists(BIN, function(exists) {
