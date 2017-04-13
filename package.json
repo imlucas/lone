@@ -37,7 +37,7 @@
     "tar": "^2.1.0",
     "untildify": "^3.0.2",
     "which": "^1.0.9",
-    "yargs": "^6.3.0"
+    "yargs": "^7.1.0"
   },
   "devDependencies": {
     "eslint-config-mongodb-js": "^2.0.0",
